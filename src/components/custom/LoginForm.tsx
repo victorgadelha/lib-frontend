@@ -14,13 +14,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LuLibraryBig } from "react-icons/lu";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Por favor, digite um e-mail válido." }),
   password: z.string().min(8).max(50),
 });
 
-const UserForm = () => {
+const LoginForm = () => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,6 +33,10 @@ const UserForm = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    toast({
+      title: "Login efetuado com sucesso!",
+      description: "Você será redirecionado para a página principal.",
+    });
   }
 
   return (
@@ -86,4 +92,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default LoginForm;
