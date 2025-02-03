@@ -46,7 +46,7 @@ const UserForm = () => {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="mb-4">
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
