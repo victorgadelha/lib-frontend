@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { LuLibraryBig, LuMail, LuLock } from "react-icons/lu";
 import { useToast } from "@/hooks/use-toast";
 
+import { useRouter } from "next/navigation";
+
 const formSchema = z.object({
   email: z.string().email({ message: "Por favor, digite um e-mail válido." }),
   password: z.string().min(8).max(50),
@@ -23,6 +25,7 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,14 +40,21 @@ const LoginForm = () => {
       title: "Login efetuado com sucesso!",
       description: "Você será redirecionado para a página principal.",
     });
+    router.push("/dashboard");
   }
 
   return (
-    <div className="flex flex-col justify-center w-80 h-80">
-      <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-center w-96 h-96">
+      <div className="flex justify-center items-center mb-3">
+        {" "}
         <LuLibraryBig className="w-14 h-14 text-blue-500" />
-        <h1 className="ml-2 text-4xl font-display font-bold">LIB+</h1>
+        <h1 className="ml-2 text-4xl font-display font-bold text-gray-800 ">
+          LIB+
+        </h1>{" "}
       </div>
+      <p className="font-sans font-normal mb-5 text-gray-500 text-center">
+        Sistema de gerenciamento de biblioteca
+      </p>
 
       <Form {...form}>
         <form
@@ -60,7 +70,12 @@ const LoginForm = () => {
                 <FormControl>
                   <div className="relative flex items-center">
                     <LuMail className="absolute size-5 left-3 text-gray-500" />
-                    <Input className="pl-9" placeholder="Digite seu e-mail" />
+                    <Input
+                      className="pl-9 pt-6 pb-6"
+                      type="email"
+                      placeholder="Digite o seu e-mail"
+                      {...field}
+                    />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -77,7 +92,7 @@ const LoginForm = () => {
                   <div className="relative flex items-center">
                     <LuLock className="absolute size-5 left-3 text-gray-500" />
                     <Input
-                      className="pl-9"
+                      className="pl-9 pt-6 pb-6"
                       type="password"
                       placeholder="Digite a sua senha"
                       {...field}
@@ -88,9 +103,15 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Button className="mt-4 w-full p-6" type="submit">
+          <Button
+            className="mt-4 mb-4 w-full p-6 bg-blue-500 hover:bg-blue-800 transition duration-400 ease-in-out "
+            type="submit"
+          >
             LOGIN
           </Button>
+          <p className="font-sans font-normal mb-5 text-gray-500 text-center">
+            Todos os direitos reservados
+          </p>
         </form>
       </Form>
     </div>
