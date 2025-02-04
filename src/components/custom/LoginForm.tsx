@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LuLibraryBig } from "react-icons/lu";
+import { LuLibraryBig, LuMail, LuLock } from "react-icons/lu";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -43,11 +43,14 @@ const LoginForm = () => {
     <div className="flex flex-col justify-center w-80 h-80">
       <div className="flex justify-center items-center">
         <LuLibraryBig className="w-14 h-14 text-blue-500" />
-        <h1 className="ml-2 text-4xl font-bold">LIB+</h1>
+        <h1 className="ml-2 text-4xl font-display font-bold">LIB+</h1>
       </div>
 
       <Form {...form}>
-        <form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="w-full font-sans"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <FormField
             control={form.control}
             name="email"
@@ -55,11 +58,10 @@ const LoginForm = () => {
               <FormItem className="mb-4">
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    className="outline-none p-6"
-                    placeholder="Digite o seu e-mail"
-                    {...field}
-                  />
+                  <div className="relative flex items-center">
+                    <LuMail className="absolute size-5 left-3 text-gray-500" />
+                    <Input className="pl-9" placeholder="Digite seu e-mail" />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -72,12 +74,15 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Senha</FormLabel>
                 <FormControl>
-                  <Input
-                    className="outline-none p-6"
-                    type="password"
-                    placeholder="Digite a sua senha"
-                    {...field}
-                  />
+                  <div className="relative flex items-center">
+                    <LuLock className="absolute size-5 left-3 text-gray-500" />
+                    <Input
+                      className="pl-9"
+                      type="password"
+                      placeholder="Digite a sua senha"
+                      {...field}
+                    />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
