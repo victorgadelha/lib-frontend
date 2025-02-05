@@ -21,7 +21,7 @@ import {
 
 const Header = () => {
   return (
-    <header className="flex items-center shadow-md p-6  text-gray-500">
+    <header className="flex items-center shadow-md p-6 ">
       <div className="flex items-center">
         {" "}
         <LuLibraryBig className="w-14 h-14 text-blue-500" />
