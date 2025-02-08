@@ -1,6 +1,7 @@
-import DropDown from "@/components/custom/DropDown";
+import { books } from "@/books/books";
+import { columns } from "@/books/columns";
+import { DataTable } from "@/books/data.table";
 import Header from "@/components/custom/Header";
-import SearchBar from "@/components/custom/SearchBar";
 
 import React from "react";
 
@@ -18,9 +19,7 @@ const page = () => {
             Pesquise e solicite qualquer livro da nossa coleção
           </h2>
           <div className="flex items-center gap-6 mt-8 border border-gray-300 p-3">
-            {" "}
-            <SearchBar />
-            <DropDown />
+            <DataTable columns={columns} data={books} />
           </div>
         </div>
       </main>
