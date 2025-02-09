@@ -32,6 +32,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [search, setSearch] = React.useState<string>("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -56,10 +57,11 @@ export function DataTable<TData, TValue>({
       <Input
         className="p-6 mb-6"
         placeholder="Pesquise pelos livros..."
-        value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn("title")?.setFilterValue(event.target.value)
-        }
+        value={search}
+        onChange={(event) => {
+          setSearch(event.target.value);
+          table.setGlobalFilter(event.target.value);
+        }}
       />
       <div className="rounded-md border">
         <Table>
