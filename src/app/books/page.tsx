@@ -7,7 +7,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="h-screen w-full font-sans text-gray-500">
+    <div className="h-screen w-full font-sans text-gray-500 overflow-hidden">
       <Header />
       <main className="h-screen w-full">
         <div className="pt-12 px-12">

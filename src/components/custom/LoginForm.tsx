@@ -40,7 +40,7 @@ const LoginForm = () => {
       title: "Login efetuado com sucesso!",
       description: "Você será redirecionado para a página principal.",
     });
-    router.push("/dashboard");
+    router.push("/books");
   }
 
   return (
