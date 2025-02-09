@@ -53,18 +53,15 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
+      <Input
+        className="p-6 mb-6"
+        placeholder="Pesquise pelos livros..."
+        value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+        onChange={(event) =>
+          table.getColumn("title")?.setFilterValue(event.target.value)
+        }
+      />
       <div className="rounded-md border">
-        <div className="flex items-center py-4">
-          <Input
-            placeholder="Pesquise pelos livros..."
-            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("title")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-        </div>
-
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -107,7 +104,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Sem resultados.
                 </TableCell>
               </TableRow>
             )}
@@ -117,6 +114,7 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center justify-end space-x-2 py-4">
         {" "}
         <Button
+          className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white transition duration-200"
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
@@ -125,6 +123,7 @@ export function DataTable<TData, TValue>({
           Anterior
         </Button>
         <Button
+          className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white transition duration-200"
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}
