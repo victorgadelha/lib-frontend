@@ -9,6 +9,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
@@ -30,49 +40,22 @@ export const columns: ColumnDef<Book>[] = [
       );
     },
   },
+
   {
-    accessorKey: "author",
+    accessorKey: "category",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Autor
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "languages",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Idiomas
+          Categoria
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
 
-  {
-    accessorKey: "isbn",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          ISBN
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
   {
     id: "actions",
     cell: ({ row }) => {
@@ -86,12 +69,39 @@ export const columns: ColumnDef<Book>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(book.id)}
-            >
-              Visualizar Detalhes
-            </DropdownMenuItem>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost">Visualizar Detalhes</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[40%]">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold tracking-tight ">
+                    {book.title}
+                  </DialogTitle>
+                  <DialogDescription asChild={true}>
+                    <div className="flex justify-center flex-col">
+                      {" "}
+                      <span className="text-xl font-semibold">
+                        Sobre o livro:
+                      </span>{" "}
+                      <p className="text-base text-muted-foreground leading-relaxed">
+                        {" "}
+                        {book.description}
+                      </p>
+                    </div>
+                  </DialogDescription>
+                </DialogHeader>
+
+                <DialogFooter className="flex justify-center">
+                  <div className="flex justify-end flex-col">
+                    {" "}
+                    <h2 className="text-sm text-muted-foreground font-medium">
+                      ISBN: {book.isbn}
+                    </h2>
+                  </div>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </DropdownMenuContent>
         </DropdownMenu>
       );

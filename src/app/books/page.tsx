@@ -7,10 +7,10 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="h-screen w-full font-sans text-gray-500 overflow-hidden">
+    <div className="h-screen w-full font-sans text-gray-500 overflow-hidden ">
       <Header />
-      <main className="h-screen w-full">
-        <div className="pt-12 px-12">
+      <main className="h-screen w-full px-32">
+        <div className="pt-12">
           {" "}
           <h1 className="font-display text-4xl text-black  mb-2">
             Livros disponíveis

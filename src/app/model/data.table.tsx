@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Book } from "lucide-react";
+import { Book, Tag } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -96,6 +96,14 @@ export function DataTable<TData, TValue>({
                       {cell.column.id === "title" ? (
                         <div className="flex items-center">
                           <Book className="mr-2 text-blue-500" />
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </div>
+                      ) : cell.column.id === "category" ? (
+                        <div className="flex items-center">
+                          <Tag className="mr-2 text-blue-500" />
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
